@@ -141,7 +141,8 @@ public class ConfigGenerator {
     public static void saveConfigToFile(String configJson, String filePath) {
         try {
             Path path = Path.of(filePath);
-            mapper.writerWithDefaultPrettyPrinter().writeValue(path.toFile(), mapper.readValue(configJson, Object.class));
+            mapper.writerWithDefaultPrettyPrinter()
+                    .writeValue(path.toFile(), mapper.readValue(configJson, Object.class));
             System.out.println("Конфигурация сохранена в: " + path.toAbsolutePath());
         } catch (Exception e) {
             throw new RuntimeException("Ошибка при сохранении конфигурации: " + e.getMessage(), e);
