@@ -37,7 +37,7 @@ public class ImageWriter {
             logger.info("Изображение сохранено по пути: {}", path.toAbsolutePath());
 
         } catch (Exception e) {
-            logger.error("Ошибка при сохранении изображения: {}", e.getMessage(), e);
+            logger.error("Ошибка при сохранении изображения: ", e);
             throw new RuntimeException("Ошибка при сохранении изображения: " + e.getMessage(), e);
         }
     }

@@ -27,6 +27,7 @@ public class FractalRenderer {
     private static final double X_RANGE = X_MAX - X_MIN;
     private static final double Y_RANGE = Y_MAX - Y_MIN;
     private static final int BURN_IN_ITERATIONS = 20;
+    private static final Random random = new Random();
 
     private final Map<Integer, byte[]> affineColors = new HashMap<>();
 
@@ -40,11 +41,10 @@ public class FractalRenderer {
     }
 
     private void initAffineColors() {
-        Random colorRandom = new Random(config.getSeed());
         for (int i = 0; i < config.getAffineParams().size(); i++) {
-            byte r = (byte) colorRandom.nextInt(256);
-            byte g = (byte) colorRandom.nextInt(256);
-            byte b = (byte) colorRandom.nextInt(256);
+            byte r = (byte) random.nextInt(256);
+            byte g = (byte) random.nextInt(256);
+            byte b = (byte) random.nextInt(256);
             affineColors.put(i, new byte[] {r, g, b});
         }
     }
@@ -58,14 +58,12 @@ public class FractalRenderer {
 
         applyColorCorrection();
         hitCount = null;
-        System.gc();
         return colorBuffer;
     }
 
     private void renderSinglethreaded() {
         logger.info("Начало однопоточного рендеринга");
         long startTime = System.currentTimeMillis();
-        Random random = new Random(config.getSeed());
         double x = 0.0;
         double y = 0.0;
 
@@ -111,12 +109,11 @@ public class FractalRenderer {
         long startTime = System.currentTimeMillis();
 
         logger.debug("Выполнение {} burn-in итераций для сходимости", BURN_IN_ITERATIONS);
-        Random burnRandom = new Random(config.getSeed());
         double x = 0.0;
         double y = 0.0;
 
         for (int i = 0; i < BURN_IN_ITERATIONS; i++) {
-            int transformIndex = burnRandom.nextInt(config.getAffineParams().size());
+            int transformIndex = random.nextInt(config.getAffineParams().size());
             AffineTransform affineTransform = config.getAffineParams().get(transformIndex);
             double[] affineResult = affineTransform.transform(x, y);
 
@@ -315,7 +312,6 @@ public class FractalRenderer {
         @Override
         public void run() {
             logger.debug("Поток {} начал обработку {} итераций", threadId, iterations);
-            Random random = new Random(config.getSeed() + threadId * 12345L);
             double x = initialX;
             double y = initialY;
 

@@ -308,7 +308,6 @@ public class FlameFunctionFactory {
     static class SuperShapeFunction implements FlameFunction {
         @Override
         public double[] apply(double x, double y) {
-            double r = Math.sqrt(x * x + y * y);
             double theta = Math.atan2(y, x);
             double n = 4.0;
             double m = 3.0;

@@ -111,7 +111,7 @@ public class SimpleFractalBenchmark {
             double efficiency = (speedup / result.threads) * 100;
 
             System.out.printf(
-                    "%7d | %8.2f | %8.2f | %8.2f | %7.2fx | %13.1f\n",
+                    "%7d | %8.2f | %8.2f | %8.2f | %7.2fx | %13.1f%n",
                     result.threads,
                     result.averageTime / 1000.0,
                     result.minTime / 1000.0,
@@ -124,9 +124,9 @@ public class SimpleFractalBenchmark {
         double maxSpeedup = baselineTime / best.averageTime;
 
         System.out.println("\nSummary:");
-        System.out.printf("Baseline (1 thread): %.2f sec\n", baselineTime / 1000.0);
-        System.out.printf("Max speedup: %.2fx with %d threads\n", maxSpeedup, best.threads);
-        System.out.printf("Parallel efficiency: %.1f%%\n", (maxSpeedup / best.threads) * 100);
+        System.out.printf("Baseline (1 thread): %.2f sec%n", baselineTime / 1000.0);
+        System.out.printf("Max speedup: %.2fx with %d threads%n", maxSpeedup, best.threads);
+        System.out.printf("Parallel efficiency: %.1f%%%n", (maxSpeedup / best.threads) * 100);
     }
 
     static class BenchmarkResult {

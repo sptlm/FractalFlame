@@ -20,7 +20,7 @@ public class ConfigParser {
             logger.debug("JSON конфигурация успешно загружена");
             return config;
         } catch (Exception e) {
-            logger.error("Ошибка при загрузке JSON конфигурации: {}", e.getMessage(), e);
+            logger.error("Ошибка при загрузке JSON конфигурации: ", e);
             throw new RuntimeException("Не удалось загрузить конфигурацию из файла " + path + ": " + e.getMessage(), e);
         }
     }
@@ -42,7 +42,7 @@ public class ConfigParser {
                 logger.debug("Добавлена функция: {} с весом {}", name, weight);
             }
         } catch (NumberFormatException e) {
-            logger.error("Ошибка при парсинге веса функции: {}", e.getMessage());
+            logger.error("Ошибка при парсинге веса функции: ", e);
             throw new IllegalArgumentException("Некорректный формат веса функции: " + e.getMessage(), e);
         }
         return functions;
@@ -70,7 +70,7 @@ public class ConfigParser {
                 logger.debug("Добавлено аффинное преобразование: a={}, b={}, c={}, d={}, e={}, f={}", a, b, c, d, e, f);
             }
         } catch (NumberFormatException e) {
-            logger.error("Ошибка при парсинге числового значения: {}", e.getMessage());
+            logger.error("Ошибка при парсинге числового значения: ", e);
             throw new IllegalArgumentException("Некорректный формат аффинных параметров: " + e.getMessage(), e);
         }
         return transforms;
