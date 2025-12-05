@@ -5,7 +5,7 @@ import academy.config.FractalConfig;
 import academy.render.FractalRenderer;
 import academy.util.ImageWriter;
 import academy.validator.ConfigValidator;
-import java.nio.file.Paths;
+import java.nio.file.Path;
 import java.util.concurrent.Callable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -119,7 +119,7 @@ public class FractalFlameApplication implements Callable<Integer> {
 
         if (configPath != null && !configPath.isEmpty()) {
             logger.debug("Загрузка конфигурации из файла: {}", configPath);
-            config = ConfigParser.loadFromJson(Paths.get(configPath));
+            config = ConfigParser.loadFromJson(Path.of(configPath));
         }
 
         if (width != null) {

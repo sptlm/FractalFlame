@@ -1,7 +1,7 @@
 package academy.util;
 
 import java.awt.image.BufferedImage;
-import java.io.File;
+import java.nio.file.Path;
 import javax.imageio.ImageIO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,11 +30,11 @@ public class ImageWriter {
                 }
             }
 
-            File outputFile = new File(outputPath);
-            ImageIO.write(image, "PNG", outputFile);
+            Path path = Path.of(outputPath);
+            ImageIO.write(image, "PNG", path.toFile());
             long endTime = System.currentTimeMillis();
             logger.debug("Сохранение завершено за {} мс", endTime - startTime);
-            logger.info("Изображение сохранено по пути: {}", outputFile.getAbsolutePath());
+            logger.info("Изображение сохранено по пути: {}", path.toAbsolutePath());
 
         } catch (Exception e) {
             logger.error("Ошибка при сохранении изображения: {}", e.getMessage(), e);

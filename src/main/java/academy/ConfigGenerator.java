@@ -1,7 +1,7 @@
 package academy;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import java.io.File;
+import java.nio.file.Path;
 import java.util.*;
 
 /** Не по тз, написал для себя, чтобы перебирать быстро конфиги и искать красивые генерации:] */
@@ -140,9 +140,9 @@ public class ConfigGenerator {
 
     public static void saveConfigToFile(String configJson, String filePath) {
         try {
-            File file = new File(filePath);
-            mapper.writerWithDefaultPrettyPrinter().writeValue(file, mapper.readValue(configJson, Object.class));
-            System.out.println("Конфигурация сохранена в: " + file.getAbsolutePath());
+            Path path = Path.of(filePath);
+            mapper.writerWithDefaultPrettyPrinter().writeValue(path.toFile(), mapper.readValue(configJson, Object.class));
+            System.out.println("Конфигурация сохранена в: " + path.toAbsolutePath());
         } catch (Exception e) {
             throw new RuntimeException("Ошибка при сохранении конфигурации: " + e.getMessage(), e);
         }
