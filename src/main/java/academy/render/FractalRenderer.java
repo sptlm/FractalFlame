@@ -45,7 +45,7 @@ public class FractalRenderer {
             byte r = (byte) colorRandom.nextInt(256);
             byte g = (byte) colorRandom.nextInt(256);
             byte b = (byte) colorRandom.nextInt(256);
-            affineColors.put(i, new byte[]{r, g, b});
+            affineColors.put(i, new byte[] {r, g, b});
         }
     }
 
@@ -106,8 +106,8 @@ public class FractalRenderer {
 
     private void renderMultithreaded() {
         logger.info(
-            "Начало многопоточного рендеринга с {} потоками, ниже прогресс выполнения для одного и потоков",
-            config.getThreads());
+                "Начало многопоточного рендеринга с {} потоками, ниже прогресс выполнения для одного и потоков",
+                config.getThreads());
         long startTime = System.currentTimeMillis();
 
         logger.debug("Выполнение {} burn-in итераций для сходимости", BURN_IN_ITERATIONS);
@@ -177,7 +177,7 @@ public class FractalRenderer {
             yAccum /= totalWeight;
         }
 
-        return new double[]{xAccum, yAccum};
+        return new double[] {xAccum, yAccum};
     }
 
     private void updatePixelBuffer(double x, double y, int transformIndex) {
@@ -190,9 +190,9 @@ public class FractalRenderer {
             applySymmetry(pixelX, pixelY, color);
         } else {
             if (pixelX >= 0
-                && pixelX < config.getSize().getWidth()
-                && pixelY >= 0
-                && pixelY < config.getSize().getHeight()) {
+                    && pixelX < config.getSize().getWidth()
+                    && pixelY >= 0
+                    && pixelY < config.getSize().getHeight()) {
                 updatePixel(pixelX, pixelY, color);
             }
         }
@@ -215,9 +215,9 @@ public class FractalRenderer {
             int finalY = (int) (rotY + centerY);
 
             if (finalX >= 0
-                && finalX < config.getSize().getWidth()
-                && finalY >= 0
-                && finalY < config.getSize().getHeight()) {
+                    && finalX < config.getSize().getWidth()
+                    && finalY >= 0
+                    && finalY < config.getSize().getHeight()) {
                 updatePixel(finalX, finalY, color);
             }
         }

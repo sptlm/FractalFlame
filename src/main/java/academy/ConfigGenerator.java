@@ -4,9 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.File;
 import java.util.*;
 
-/**
- * Не по тз, написал для себя, чтобы перебирать быстро конфиги и искать красивые генерации:]
- */
+/** Не по тз, написал для себя, чтобы перебирать быстро конфиги и искать красивые генерации:] */
 public class ConfigGenerator {
 
     private static final ObjectMapper mapper = new ObjectMapper();
@@ -41,32 +39,31 @@ public class ConfigGenerator {
         "modulus",
         "perspective",
         "rotate",
-        "crackle",
-        "blur"
+        "crackle"
     };
 
     public static String generateRandomConfig(String outputPath) {
         Map<String, Object> config = new LinkedHashMap<>();
 
         Map<String, Integer> size = new LinkedHashMap<>();
-        size.put("width", 4000);
-        size.put("height", 4000);
+        size.put("width", 1440);
+        size.put("height", 1440);
         config.put("size", size);
 
-        config.put("iteration_count", 50_000_000);
+        config.put("iteration_count", 15_000_000);
         config.put("output_path", outputPath);
         config.put("threads", 16);
 
         config.put("seed", random.nextLong());
         config.put("gamma_correction", true);
-        config.put("gamma", 2.2);
+        config.put("gamma", 2);
         config.put("symmetry_level", 1 + random.nextInt(8));
 
-        int functionCount = random.nextInt(8) + 2;
+        int functionCount = random.nextInt(3) + 2;
         List<Map<String, Object>> functions = generateRandomFunctions(functionCount);
         config.put("functions", functions);
 
-        int affineCount = random.nextInt(6) + 2;
+        int affineCount = random.nextInt(3) + 2;
         List<Map<String, Double>> affineParams = generateRandomAffineParams(affineCount);
 
         config.put("affine_params", affineParams);
@@ -91,8 +88,7 @@ public class ConfigGenerator {
         for (String funcName : usedFunctions) {
             Map<String, Object> funcMap = new LinkedHashMap<>();
             funcMap.put("name", funcName);
-            // Вес в диапазоне [0.1, 1.5]
-            funcMap.put("weight", Math.round((0.1 + random.nextDouble() * 1.4) * 100.0) / 100.0);
+            funcMap.put("weight", Math.round((0.01 + random.nextDouble() * 0.99) * 100.0) / 100.0);
             functions.add(funcMap);
         }
 
@@ -107,6 +103,7 @@ public class ConfigGenerator {
 
             double a, b, d, e;
             double scale;
+            double det;
 
             // Повторяем, пока не получим сжимающее преобразование
             do {
@@ -115,23 +112,21 @@ public class ConfigGenerator {
                 d = randomCoeff();
                 e = randomCoeff();
 
-                scale = Math.max(
-                        Math.sqrt(a * a + d * d),
-                        Math.sqrt(b * b + e * e)
-                );
-            } while (scale >= 1.0);
+                scale = Math.max(Math.sqrt(a * a + d * d), Math.sqrt(b * b + e * e));
+                det = a * e - b * d;
+            } while (scale >= 1.0 || Math.abs(det) < 0.000001);
 
-            params.put("a", Math.round(a * 1000000.0) / 1000000.0);
-            params.put("b", Math.round(b * 1000000.0) / 1000000.0);
-            params.put("d", Math.round(d * 1000000.0) / 1000000.0);
-            params.put("e", Math.round(e * 1000000.0) / 1000000.0);
+            params.put("a", Math.round(a * 10.0) / 10.0);
+            params.put("b", Math.round(b * 10.0) / 10.0);
+            params.put("d", Math.round(d * 10.0) / 10.0);
+            params.put("e", Math.round(e * 10.0) / 10.0);
 
             // Трансляционные параметры (в диапазоне [-1, 1])
             double c = -1.0 + random.nextDouble() * 2.0;
             double f = -1.0 + random.nextDouble() * 2.0;
 
-            params.put("c", Math.round(c * 1000000.0) / 1000000.0);
-            params.put("f", Math.round(f * 1000000.0) / 1000000.0);
+            params.put("c", Math.round(c * 10.0) / 10.0);
+            params.put("f", Math.round(f * 10.0) / 10.0);
 
             affineParams.add(params);
         }
@@ -140,7 +135,7 @@ public class ConfigGenerator {
     }
 
     private static double randomCoeff() {
-        return -1.0 + random.nextDouble() * 2.0;
+        return -1.0 + (random.nextInt(4) == 0 ? 1 : random.nextDouble() * 2.0);
     }
 
     public static void saveConfigToFile(String configJson, String filePath) {

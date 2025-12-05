@@ -1,14 +1,7 @@
-package com.fractal.flame.config;
+package academy.config;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/**
- * Класс для представления аффинного преобразования
- * Аффинное преобразование описывается матрицей:
- * | a  b  c |
- * | d  e  f |
- * | 0  0  1 |
- */
 public class AffineTransform {
     // Масштаб/вращение X
     @JsonProperty("a")
@@ -34,8 +27,7 @@ public class AffineTransform {
     @JsonProperty("f")
     private double f;
 
-    public AffineTransform() {
-    }
+    public AffineTransform() {}
 
     public AffineTransform(double a, double b, double c, double d, double e, double f) {
         this.a = a;
@@ -94,24 +86,9 @@ public class AffineTransform {
         this.f = f;
     }
 
-    /**
-     * Применяет аффинное преобразование к точке (x, y)
-     * Новая точка: (x', y') = (a*x + b*y + c, d*x + e*y + f)
-     */
     public double[] transform(double x, double y) {
         double newX = a * x + b * y + c;
         double newY = d * x + e * y + f;
-        return new double[]{newX, newY};
-    }
-
-    /**
-     * Валидирует аффинное преобразование
-     */
-    public void validate() {
-        // Проверяем, что матрица не является особой (детерминант не ноль)
-        double determinant = a * e - b * d;
-        if (Math.abs(determinant) < 1e-10) {
-            throw new IllegalArgumentException("Аффинное преобразование является особой матрицей (детерминант близок к нулю)");
-        }
+        return new double[] {newX, newY};
     }
 }

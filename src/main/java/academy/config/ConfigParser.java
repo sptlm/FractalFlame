@@ -1,26 +1,17 @@
-package com.fractal.flame.config;
+package academy.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-/**
- * Парсер для загрузки конфигурации из JSON файла и CLI параметров
- */
 public class ConfigParser {
     private static final Logger logger = LoggerFactory.getLogger(ConfigParser.class);
     private static final ObjectMapper objectMapper = new ObjectMapper();
 
-    /**
-     * Загружает конфигурацию из JSON файла
-     * @param path путь к файлу конфигурации
-     * @return загруженная конфигурация
-     */
     public static FractalConfig loadFromJson(Path path) {
         try {
             logger.debug("Загрузка JSON конфигурации из: {}", path.toString());
@@ -34,11 +25,6 @@ public class ConfigParser {
         }
     }
 
-    /**
-     * Парсит функции трансформации из строки формата "swirl:1.0,horseshoe:0.8"
-     * @param functionsStr строка с функциями
-     * @return список функций трансформации
-     */
     public static List<TransformFunction> parseFunctions(String functionsStr) {
         List<TransformFunction> functions = new ArrayList<>();
         try {
@@ -62,11 +48,6 @@ public class ConfigParser {
         return functions;
     }
 
-    /**
-     * Парсит аффинные параметры из строки формата "a,b,c,d,e,f/a,b,c,d,e,f"
-     * @param paramsStr строка с аффинными параметрами
-     * @return список аффинных преобразований
-     */
     public static List<AffineTransform> parseAffineParams(String paramsStr) {
         List<AffineTransform> transforms = new ArrayList<>();
         try {
@@ -76,7 +57,8 @@ public class ConfigParser {
                 transformStr = transformStr.trim();
                 String[] params = transformStr.split(",");
                 if (params.length != 6) {
-                    throw new IllegalArgumentException("Аффинное преобразование должно содержать ровно 6 параметров, получено: " + params.length);
+                    throw new IllegalArgumentException(
+                            "Аффинное преобразование должно содержать ровно 6 параметров, получено: " + params.length);
                 }
                 double a = Double.parseDouble(params[0].trim());
                 double b = Double.parseDouble(params[1].trim());

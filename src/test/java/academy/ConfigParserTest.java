@@ -1,21 +1,17 @@
-package com.fractal.flame.config;
-
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-
-import java.util.List;
+package academy;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-/**
- * Тесты для проверки корректности парсинга конфигурации
- */
+import academy.config.AffineTransform;
+import academy.config.ConfigParser;
+import academy.config.TransformFunction;
+import java.util.List;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+
 @DisplayName("Тесты парсинга конфигурации")
 public class ConfigParserTest {
 
-    /**
-     * Тест парсинга функций трансформации из строки
-     */
     @Test
     @DisplayName("Парсинг функций трансформации из строки")
     public void testParseFunctions() {
@@ -35,9 +31,6 @@ public class ConfigParserTest {
         assertEquals(0.5, functions.get(2).getWeight(), 0.001);
     }
 
-    /**
-     * Тест парсинга одной функции
-     */
     @Test
     @DisplayName("Парсинг одной функции трансформации")
     public void testParseSingleFunction() {
@@ -50,9 +43,6 @@ public class ConfigParserTest {
         assertEquals(1.5, functions.get(0).getWeight(), 0.001);
     }
 
-    /**
-     * Тест парсинга функций с пробелами
-     */
     @Test
     @DisplayName("Парсинг функций с пробелами")
     public void testParseFunctionsWithSpaces() {
@@ -65,9 +55,6 @@ public class ConfigParserTest {
         assertEquals(1.0, functions.get(0).getWeight(), 0.001);
     }
 
-    /**
-     * Тест парсинга некорректной строки функций
-     */
     @Test
     @DisplayName("Парсинг некорректной строки функций выбрасывает исключение")
     public void testParseInvalidFunctions() {
@@ -77,9 +64,6 @@ public class ConfigParserTest {
         });
     }
 
-    /**
-     * Тест парсинга аффинных параметров
-     */
     @Test
     @DisplayName("Парсинг аффинных параметров из строки")
     public void testParseAffineParams() {
@@ -106,9 +90,6 @@ public class ConfigParserTest {
         assertEquals(0.0, transforms.get(1).getF(), 0.001);
     }
 
-    /**
-     * Тест парсинга одного аффинного преобразования
-     */
     @Test
     @DisplayName("Парсинг одного аффинного преобразования")
     public void testParseSingleAffineTransform() {
@@ -125,9 +106,6 @@ public class ConfigParserTest {
         assertEquals(1.0, transforms.get(0).getF(), 0.001);
     }
 
-    /**
-     * Тест парсинга некорректных аффинных параметров
-     */
     @Test
     @DisplayName("Парсинг некорректных аффинных параметров выбрасывает исключение")
     public void testParseInvalidAffineParams() {
@@ -138,9 +116,6 @@ public class ConfigParserTest {
         });
     }
 
-    /**
-     * Тест парсинга аффинных параметров с нечисловыми значениями
-     */
     @Test
     @DisplayName("Парсинг аффинных параметров с нечисловыми значениями выбрасывает исключение")
     public void testParseInvalidAffineParamsNonNumeric() {
