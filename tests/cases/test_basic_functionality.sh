@@ -8,7 +8,7 @@ ARGS="-w 800 -h 600 -o test_output.png"
 
 # Запуск Java-программы
 echo "Running: java -Dlog4j2.level=OFF -jar $JAR_PATH $ARGS"
-java -jar "$JAR_PATH" $ARGS
+java -Dlog4j2.level=OFF -jar "$JAR_PATH" $ARGS
 
 # Проверка кода возврата
 EXIT_CODE=$?
