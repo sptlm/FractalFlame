@@ -82,7 +82,7 @@ public class FractalRenderer {
         int totalIterations = config.getIterationCount();
         for (int iteration = 0; iteration < totalIterations; iteration++) {
             if (iteration % Math.max(1, totalIterations / 10) == 0) {
-                int percent = (int) ((iteration * 100.0) / totalIterations);
+                int percent = (int) (iteration * 100.0 / totalIterations);
                 logger.info("Прогресс: {} / {} ({}%)", iteration, totalIterations, percent);
             }
 
@@ -202,7 +202,7 @@ public class FractalRenderer {
         double relY = pixelY - centerY;
 
         for (int i = 0; i < config.getSymmetryLevel(); i++) {
-            double angle = (2.0 * Math.PI * i) / config.getSymmetryLevel();
+            double angle = 2.0 * Math.PI * i / config.getSymmetryLevel();
             double cosA = Math.cos(angle);
             double sinA = Math.sin(angle);
             double rotX = relX * cosA - relY * sinA;
@@ -280,9 +280,9 @@ public class FractalRenderer {
                     brightness = normalizedIntensity;
                 }
 
-                int r = (colorBuffer[y][x][0] & 0xFF);
-                int g = (colorBuffer[y][x][1] & 0xFF);
-                int b = (colorBuffer[y][x][2] & 0xFF);
+                int r = colorBuffer[y][x][0] & 0xFF;
+                int g = colorBuffer[y][x][1] & 0xFF;
+                int b = colorBuffer[y][x][2] & 0xFF;
 
                 colorBuffer[y][x][0] = (byte) Math.min(255, (int) (r * brightness));
                 colorBuffer[y][x][1] = (byte) Math.min(255, (int) (g * brightness));
@@ -328,7 +328,7 @@ public class FractalRenderer {
                 updatePixelBuffer(x, y, transformIndex);
 
                 if (iteration % Math.max(1, iterations / 10) == 0) {
-                    int percent = (int) ((iteration * 100.0) / iterations);
+                    int percent = (int) (iteration * 100.0 / iterations);
                     if (threadId == 0) {
                         logger.info("Поток {}: прогресс {} / {} ({}%)", threadId, iteration, iterations, percent);
                     } else {
