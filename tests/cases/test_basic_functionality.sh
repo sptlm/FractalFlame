@@ -4,10 +4,10 @@ echo "Testing basic functionality..."
 
 # Аргументы для запуска программы
 JAR_PATH="$1"
-ARGS="-Dlog4j2.level=OFF -w 800 -h 600 -o test_output.png"
+ARGS="-w 800 -h 600 -o test_output.png"
 
 # Запуск Java-программы
-echo "Running: java -jar $JAR_PATH $ARGS"
+echo "Running: java -Dlog4j2.level=OFF -jar $JAR_PATH $ARGS"
 java -jar "$JAR_PATH" $ARGS
 
 # Проверка кода возврата

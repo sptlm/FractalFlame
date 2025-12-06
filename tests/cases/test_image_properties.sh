@@ -4,12 +4,12 @@ echo "Testing image properties..."
 
 # Аргументы для запуска программы
 JAR_PATH="$1"
-ARGS="-Dlog4j2.level=OFF -w 800 -h 600 -o test_output.png"
+ARGS="-w 800 -h 600 -o test_output.png"
 
 # Генерация тестового изображения, если оно не существует
 if [ ! -f "test_output.png" ]; then
     echo "Generating test image..."
-    java -jar "$JAR_PATH" $ARGS
+    java -Dlog4j2.level=OFF -jar "$JAR_PATH" $ARGS
     # Проверка, была ли генерация успешной
     if [ $? -ne 0 ]; then
         echo "✗ Failed to generate test image"
