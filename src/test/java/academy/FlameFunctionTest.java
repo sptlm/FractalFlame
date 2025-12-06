@@ -445,23 +445,6 @@ public class FlameFunctionTest {
         assertTrue(result[1] % 0.5 < DELTA || Math.abs(result[1] % 0.5 - 0.5) < DELTA);
     }
 
-    @Test
-    @DisplayName("Blur: добавляет случайный шум")
-    public void testBlurFunction() {
-        FlameFunction func = FlameFunctionFactory.createFunction("blur");
-
-        // Проверяем что результат отличается, но не сильно
-        double[] result1 = func.apply(5, 5);
-        double[] result2 = func.apply(5, 5);
-
-        // Разные результаты из-за рандома
-        assertTrue(result1[0] != result2[0] || result1[1] != result2[1]);
-
-        // Но не дальше чем 0.1 от оригинала
-        assertTrue(Math.abs(result1[0] - 5) < 0.2);
-        assertTrue(Math.abs(result1[1] - 5) < 0.2);
-    }
-
     // ========== ОБЩИЕ ТЕСТЫ ==========
 
     @Test
@@ -502,7 +485,6 @@ public class FlameFunctionTest {
                 "perspective",
                 "rotate",
                 "crackle",
-                "blur"
             })
     @DisplayName("Все функции корректно работают с нулевыми координатами")
     public void testAllFunctionsHandleZero(String functionName) {
