@@ -44,7 +44,7 @@ else
 fi
 
 # Проверка сигнатуры PNG (первые 8 байт должны быть 89 50 4E 47 0D 0A 1A 0A)
-PNG_SIGNATURE=$(dd if="test_output.png" bs=8 count=1 2>/dev/null | xxd -p)
+PNG_SIGNATURE=$(dd if="test_output.png" bs=8 count=1 2>/dev/null | od -An -tx1 | tr -d ' \n')
 if [ "$PNG_SIGNATURE" = "89504e470d0a1a0a" ]; then
     echo "✓ Image file has valid PNG signature"
 else
