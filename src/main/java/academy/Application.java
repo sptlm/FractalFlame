@@ -12,9 +12,9 @@ import org.slf4j.LoggerFactory;
 import picocli.CommandLine;
 import picocli.CommandLine.Option;
 
-public class FractalFlameApplication implements Callable<Integer> {
+public class Application implements Callable<Integer> {
 
-    private static final Logger logger = LoggerFactory.getLogger(FractalFlameApplication.class);
+    private static final Logger logger = LoggerFactory.getLogger(Application.class);
 
     @Option(
             names = {"-w", "--width"},
@@ -77,7 +77,7 @@ public class FractalFlameApplication implements Callable<Integer> {
     private Integer symmetryLevel;
 
     public static void main(String[] args) {
-        int exitCode = new CommandLine(new FractalFlameApplication()).execute(args);
+        int exitCode = new CommandLine(new Application()).execute(args);
         System.exit(exitCode);
     }
 
