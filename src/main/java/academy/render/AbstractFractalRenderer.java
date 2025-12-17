@@ -14,6 +14,8 @@ import org.slf4j.LoggerFactory;
 public abstract class AbstractFractalRenderer implements Renderer {
     private static final Logger logger = LoggerFactory.getLogger(AbstractFractalRenderer.class);
 
+    private final Random colorRandom = new Random();
+
     protected static final double X_MIN = -1;
     protected static final double X_MAX = 1;
     protected static final double Y_MIN = -1;
@@ -27,7 +29,7 @@ public abstract class AbstractFractalRenderer implements Renderer {
 
     protected void initAffineColors(FractalConfig config) {
         // Создаем детерминированный Random для цветов на основе seed
-        Random colorRandom = new Random(config.getSeed());
+        colorRandom.setSeed(config.getSeed());
 
         for (int i = 0; i < config.getAffineParams().size(); i++) {
             byte r = (byte) colorRandom.nextInt(256);

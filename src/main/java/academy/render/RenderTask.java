@@ -10,6 +10,8 @@ import org.slf4j.LoggerFactory;
 public class RenderTask implements Callable<LocalBuffer> {
     private static final Logger logger = LoggerFactory.getLogger(RenderTask.class);
 
+    private final Random threadRandom = new Random();
+
     private final int threadId;
     private final int iterations;
     private final FractalConfig config;
@@ -42,7 +44,7 @@ public class RenderTask implements Callable<LocalBuffer> {
                 new LocalBuffer(config.getSize().getWidth(), config.getSize().getHeight());
 
         // Создаем Random для этого потока
-        Random threadRandom = new Random(config.getSeed() + threadId);
+        threadRandom.setSeed(config.getSeed() + threadId);
 
         // Начальные координаты (результат burn-in)
         double x = initialX;
