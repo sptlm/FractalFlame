@@ -6,6 +6,8 @@ import java.util.Random;
 
 public class SingleThreadedRenderer extends AbstractFractalRenderer {
 
+    private final Random random = new Random();
+
     @Override
     public byte[][][] render(FractalConfig config) {
 
@@ -20,7 +22,7 @@ public class SingleThreadedRenderer extends AbstractFractalRenderer {
         initAffineColors(config);
 
         // Создаем Random на основе seed
-        Random random = new Random(config.getSeed());
+        random.setSeed(config.getSeed());
 
         // Выполняем burn-in итерации для сходимости
         getLogger().debug("Выполнение {} burn-in итераций для сходимости", BURN_IN_ITERATIONS);
