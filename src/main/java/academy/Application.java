@@ -2,7 +2,9 @@ package academy;
 
 import academy.config.ConfigParser;
 import academy.config.FractalConfig;
-import academy.render.FractalRenderer;
+import academy.render.MultiThreadedRenderer;
+import academy.render.Renderer;
+import academy.render.SingleThreadedRenderer;
 import academy.util.ImageWriter;
 import academy.validator.ConfigValidator;
 import java.nio.file.Path;
@@ -97,8 +99,13 @@ public class Application implements Callable<Integer> {
                     config.getThreads(),
                     config.getOutputPath());
 
-            FractalRenderer renderer = new FractalRenderer(config);
-            byte[][][] imagePixels = renderer.render();
+            Renderer renderer;
+            if (config.getThreads() > 1) {
+                renderer = new MultiThreadedRenderer();
+            } else {
+                renderer = new SingleThreadedRenderer();
+            }
+            byte[][][] imagePixels = renderer.render(config);
             ImageWriter.saveImage(imagePixels, config.getOutputPath());
 
             return 0;

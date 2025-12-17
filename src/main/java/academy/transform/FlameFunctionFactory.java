@@ -1,60 +1,64 @@
 package academy.transform;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
 public class FlameFunctionFactory {
 
-    private static final Map<String, FlameFunction> CACHE = new HashMap<>();
+    private static final Map<String, FlameFunction> FUNCTIONS;
 
-    public static FlameFunction createFunction(String name) {
-        String key = name.toLowerCase();
-        return CACHE.computeIfAbsent(key, FlameFunctionFactory::createNewFunction);
+    static {
+        Map<String, FlameFunction> map = new HashMap<>();
+
+        // Классические функции
+        map.put("sinusoidal", new SinusoidalFunction());
+        map.put("spherical", new SphericalFunction());
+        map.put("swirl", new SwirlFunction());
+        map.put("horseshoe", new HorseshoeFunction());
+        map.put("diamond", new DiamondFunction());
+
+        // Полярные преобразования
+        map.put("polar", new PolarFunction());
+        map.put("waves", new WavesFunction());
+        map.put("spiral", new SpiralFunction());
+
+        // Комплексные функции
+        map.put("julia", new JuliaFunction());
+        map.put("disc", new DiscFunction());
+        map.put("hyperbolic", new HyperbolicFunction());
+
+        // Тригонометрические функции
+        map.put("cosine", new CosineFunction());
+        map.put("tangent", new TangentFunction());
+        map.put("power", new PowerFunction());
+        map.put("exponential", new ExponentialFunction());
+
+        // Прочие функции
+        map.put("heart", new HeartFunction());
+        map.put("shell", new ShellFunction());
+        map.put("whirlpool", new WhirlpoolFunction());
+        map.put("radial", new RadialFunction());
+        map.put("blob", new BlobFunction());
+        map.put("crosshatch", new CrosshatchFunction());
+        map.put("logarithmic", new LogarithmicFunction());
+        map.put("super_shape", new SuperShapeFunction());
+        map.put("eyefish", new EyefishFunction());
+        map.put("bubble", new BubbleFunction());
+        map.put("modulus", new ModulusFunction());
+        map.put("perspective", new PerspectiveFunction());
+        map.put("rotate", new RotateFunction());
+        map.put("crackle", new CrackleFunction());
+
+        FUNCTIONS = Collections.unmodifiableMap(map);
     }
 
-    private static FlameFunction createNewFunction(String name) {
-        return switch (name.toLowerCase()) {
-            // Классические функции
-            case "sinusoidal" -> new SinusoidalFunction();
-            case "spherical" -> new SphericalFunction();
-            case "swirl" -> new SwirlFunction();
-            case "horseshoe" -> new HorseshoeFunction();
-            case "diamond" -> new DiamondFunction();
-
-            // Полярные преобразования
-            case "polar" -> new PolarFunction();
-            case "waves" -> new WavesFunction();
-            case "spiral" -> new SpiralFunction();
-
-            // Комплексные функции
-            case "julia" -> new JuliaFunction();
-            case "disc" -> new DiscFunction();
-            case "hyperbolic" -> new HyperbolicFunction();
-
-            // Тригонометрические функции
-            case "cosine" -> new CosineFunction();
-            case "tangent" -> new TangentFunction();
-            case "power" -> new PowerFunction();
-            case "exponential" -> new ExponentialFunction();
-
-            // Прочие функции
-            case "heart" -> new HeartFunction();
-            case "shell" -> new ShellFunction();
-            case "whirlpool" -> new WhirlpoolFunction();
-            case "radial" -> new RadialFunction();
-            case "blob" -> new BlobFunction();
-            case "crosshatch" -> new CrosshatchFunction();
-            case "logarithmic" -> new LogarithmicFunction();
-            case "super_shape" -> new SuperShapeFunction();
-            case "eyefish" -> new EyefishFunction();
-            case "bubble" -> new BubbleFunction();
-            case "modulus" -> new ModulusFunction();
-            case "perspective" -> new PerspectiveFunction();
-            case "rotate" -> new RotateFunction();
-            case "crackle" -> new CrackleFunction();
-
-            default -> throw new IllegalArgumentException("Неизвестная функция трансформации: " + name);
-        };
+    public static FlameFunction getFunction(String name) {
+        FlameFunction function = FUNCTIONS.get(name.toLowerCase());
+        if (function == null) {
+            throw new IllegalArgumentException("Неизвестная функция трансформации: " + name);
+        }
+        return function;
     }
 
     // ========== КЛАССИЧЕСКИЕ ФУНКЦИИ ==========
@@ -327,8 +331,13 @@ public class FlameFunctionFactory {
         @Override
         public double[] apply(double x, double y) {
             double r = Math.sqrt(x * x + y * y);
-            double k = 2.0 * Math.atan(r / 2.0) / r;
-            if (r == 0) k = 1.0;
+            double k;
+            if (r == 0) {
+                k = 1.0;
+            } else {
+                k = 2.0 * Math.atan(r / 2.0) / r;
+            }
+
             double newX = x * k;
             double newY = y * k;
             return new double[] {newX, newY};

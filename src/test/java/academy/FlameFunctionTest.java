@@ -19,7 +19,7 @@ public class FlameFunctionTest {
     @Test
     @DisplayName("Sinusoidal: sin(x), sin(y)")
     public void testSinusoidalFunction() {
-        FlameFunction func = FlameFunctionFactory.createFunction("sinusoidal");
+        FlameFunction func = FlameFunctionFactory.getFunction("sinusoidal");
 
         // Тест 1: (0, 0)
         double[] result = func.apply(0, 0);
@@ -40,7 +40,7 @@ public class FlameFunctionTest {
     @Test
     @DisplayName("Spherical: 1/r² преобразование")
     public void testSphericalFunction() {
-        FlameFunction func = FlameFunctionFactory.createFunction("spherical");
+        FlameFunction func = FlameFunctionFactory.getFunction("spherical");
 
         // Тест 1: (0, 0) → (0, 0)
         double[] result = func.apply(0, 0);
@@ -62,7 +62,7 @@ public class FlameFunctionTest {
     @Test
     @DisplayName("Swirl: вращение зависит от расстояния")
     public void testSwirlFunction() {
-        FlameFunction func = FlameFunctionFactory.createFunction("swirl");
+        FlameFunction func = FlameFunctionFactory.getFunction("swirl");
 
         // Тест 1: (0, 0) → (0, 0)
         double[] result = func.apply(0, 0);
@@ -81,7 +81,7 @@ public class FlameFunctionTest {
     @Test
     @DisplayName("Horseshoe: (x²-y²)/r, 2xy/r")
     public void testHorseshoeFunction() {
-        FlameFunction func = FlameFunctionFactory.createFunction("horseshoe");
+        FlameFunction func = FlameFunctionFactory.getFunction("horseshoe");
 
         // Тест 1: (0, 0) → (0, 0)
         double[] result = func.apply(0, 0);
@@ -100,7 +100,7 @@ public class FlameFunctionTest {
     @Test
     @DisplayName("Diamond: sin(θ)*cos(r), cos(θ)*sin(r)")
     public void testDiamondFunction() {
-        FlameFunction func = FlameFunctionFactory.createFunction("diamond");
+        FlameFunction func = FlameFunctionFactory.getFunction("diamond");
 
         // Тест: (1, 1)
         double[] result = func.apply(1, 1);
@@ -117,7 +117,7 @@ public class FlameFunctionTest {
     @Test
     @DisplayName("Polar: θ/π, r-1")
     public void testPolarFunction() {
-        FlameFunction func = FlameFunctionFactory.createFunction("polar");
+        FlameFunction func = FlameFunctionFactory.getFunction("polar");
 
         // Тест 1: (1, 0) → (0, 0)
         double[] result = func.apply(1, 0);
@@ -134,7 +134,7 @@ public class FlameFunctionTest {
     @Test
     @DisplayName("Waves: x + 0.25*sin(y/0.5), y + 0.25*sin(x/0.5)")
     public void testWavesFunction() {
-        FlameFunction func = FlameFunctionFactory.createFunction("waves");
+        FlameFunction func = FlameFunctionFactory.getFunction("waves");
 
         // Тест: (1, 2)
         double[] result = func.apply(1, 2);
@@ -147,7 +147,7 @@ public class FlameFunctionTest {
     @Test
     @DisplayName("Spiral: (cos(θ)+sin(r))/r, (sin(θ)-cos(r))/r")
     public void testSpiralFunction() {
-        FlameFunction func = FlameFunctionFactory.createFunction("spiral");
+        FlameFunction func = FlameFunctionFactory.getFunction("spiral");
 
         // Тест: (1, 1)
         double[] result = func.apply(1, 1);
@@ -164,7 +164,7 @@ public class FlameFunctionTest {
     @Test
     @DisplayName("Julia: случайное ±π к θ/2 (проверяем радиус)")
     public void testJuliaFunction() {
-        FlameFunction func = FlameFunctionFactory.createFunction("julia");
+        FlameFunction func = FlameFunctionFactory.getFunction("julia");
 
         // Тест: (4, 0) r=4, newR=2
         double[] result = func.apply(4, 0);
@@ -176,7 +176,7 @@ public class FlameFunctionTest {
     @Test
     @DisplayName("Disc: θ*sin(πr)/π, θ*cos(πr)/π")
     public void testDiscFunction() {
-        FlameFunction func = FlameFunctionFactory.createFunction("disc");
+        FlameFunction func = FlameFunctionFactory.getFunction("disc");
 
         // Тест: (1, 1)
         double[] result = func.apply(1, 1);
@@ -191,7 +191,7 @@ public class FlameFunctionTest {
     @Test
     @DisplayName("Hyperbolic: sin(θ)/r, cos(θ)*r")
     public void testHyperbolicFunction() {
-        FlameFunction func = FlameFunctionFactory.createFunction("hyperbolic");
+        FlameFunction func = FlameFunctionFactory.getFunction("hyperbolic");
 
         // Тест: (3, 4) r=5, θ=atan(4/3)
         double[] result = func.apply(3, 4);
@@ -208,7 +208,7 @@ public class FlameFunctionTest {
     @Test
     @DisplayName("Cosine: cos(πx)*cosh(y), -sin(πx)*sinh(y)")
     public void testCosineFunction() {
-        FlameFunction func = FlameFunctionFactory.createFunction("cosine");
+        FlameFunction func = FlameFunctionFactory.getFunction("cosine");
 
         // Тест: (0.5, 1)
         double[] result = func.apply(0.5, 1);
@@ -221,7 +221,7 @@ public class FlameFunctionTest {
     @Test
     @DisplayName("Tangent: sin(x)/cos(y), tan(y)")
     public void testTangentFunction() {
-        FlameFunction func = FlameFunctionFactory.createFunction("tangent");
+        FlameFunction func = FlameFunctionFactory.getFunction("tangent");
 
         // Тест: (0.5, 0.5)
         double[] result = func.apply(0.5, 0.5);
@@ -234,7 +234,7 @@ public class FlameFunctionTest {
     @Test
     @DisplayName("Power: r^cos(θ) * [cos(θ), sin(θ)]")
     public void testPowerFunction() {
-        FlameFunction func = FlameFunctionFactory.createFunction("power");
+        FlameFunction func = FlameFunctionFactory.getFunction("power");
 
         // Тест: (1, 0) θ=0, r=1, r^cos(0)=1^1=1
         double[] result = func.apply(1, 0);
@@ -245,7 +245,7 @@ public class FlameFunctionTest {
     @Test
     @DisplayName("Exponential: e^(x-1) * [cos(πy), sin(πy)]")
     public void testExponentialFunction() {
-        FlameFunction func = FlameFunctionFactory.createFunction("exponential");
+        FlameFunction func = FlameFunctionFactory.getFunction("exponential");
 
         // Тест: (1, 0) e^0 * [1, 0] = [1, 0]
         double[] result = func.apply(1, 0);
@@ -264,7 +264,7 @@ public class FlameFunctionTest {
     @Test
     @DisplayName("Heart: r*(sin(πr) + cos(5θ)) * [cos(θ), sin(θ)]")
     public void testHeartFunction() {
-        FlameFunction func = FlameFunctionFactory.createFunction("heart");
+        FlameFunction func = FlameFunctionFactory.getFunction("heart");
 
         // Тест: (1, 0)
         double[] result = func.apply(1, 0);
@@ -278,7 +278,7 @@ public class FlameFunctionTest {
     @Test
     @DisplayName("Shell: (r - floor(r)) * [cos(θ+r), sin(θ+r)]")
     public void testShellFunction() {
-        FlameFunction func = FlameFunctionFactory.createFunction("shell");
+        FlameFunction func = FlameFunctionFactory.getFunction("shell");
 
         // Тест: (1.5, 0)
         double[] result = func.apply(1.5, 0);
@@ -293,7 +293,7 @@ public class FlameFunctionTest {
     @Test
     @DisplayName("Whirlpool: r * [cos(θ + 1/r), sin(θ + 1/r)]")
     public void testWhirlpoolFunction() {
-        FlameFunction func = FlameFunctionFactory.createFunction("whirlpool");
+        FlameFunction func = FlameFunctionFactory.getFunction("whirlpool");
 
         // Тест: (2, 0) r=2, θ=0
         double[] result = func.apply(2, 0);
@@ -306,7 +306,7 @@ public class FlameFunctionTest {
     @Test
     @DisplayName("Radial: sin(5θ) * r * [cos(θ), sin(θ)]")
     public void testRadialFunction() {
-        FlameFunction func = FlameFunctionFactory.createFunction("radial");
+        FlameFunction func = FlameFunctionFactory.getFunction("radial");
 
         // Тест: (1, 1)
         double[] result = func.apply(1, 1);
@@ -320,7 +320,7 @@ public class FlameFunctionTest {
     @Test
     @DisplayName("Blob: r * (0.5 + 0.5*sin(5θ)) * [cos(θ), sin(θ)]")
     public void testBlobFunction() {
-        FlameFunction func = FlameFunctionFactory.createFunction("blob");
+        FlameFunction func = FlameFunctionFactory.getFunction("blob");
 
         // Тест: (1, 0)
         double[] result = func.apply(1, 0);
@@ -334,7 +334,7 @@ public class FlameFunctionTest {
     @Test
     @DisplayName("Crosshatch: sin(x)*cos(y), cos(x)*sin(y)")
     public void testCrosshatchFunction() {
-        FlameFunction func = FlameFunctionFactory.createFunction("crosshatch");
+        FlameFunction func = FlameFunctionFactory.getFunction("crosshatch");
 
         // Тест: (π/2, π/2)
         double[] result = func.apply(Math.PI / 2, Math.PI / 2);
@@ -347,7 +347,7 @@ public class FlameFunctionTest {
     @Test
     @DisplayName("Logarithmic: ln(r) * [cos(θ), sin(θ)]")
     public void testLogarithmicFunction() {
-        FlameFunction func = FlameFunctionFactory.createFunction("logarithmic");
+        FlameFunction func = FlameFunctionFactory.getFunction("logarithmic");
 
         // Тест: (e, 0) r=e, ln(e)=1
         double[] result = func.apply(Math.E, 0);
@@ -358,7 +358,7 @@ public class FlameFunctionTest {
     @Test
     @DisplayName("SuperShape: проверка на отсутствие NaN")
     public void testSuperShapeFunction() {
-        FlameFunction func = FlameFunctionFactory.createFunction("super_shape");
+        FlameFunction func = FlameFunctionFactory.getFunction("super_shape");
 
         double[] result = func.apply(1, 1);
         assertFalse(Double.isNaN(result[0]));
@@ -370,7 +370,7 @@ public class FlameFunctionTest {
     @Test
     @DisplayName("Eyefish: 2*atan(r/2)/r * [x, y]")
     public void testEyefishFunction() {
-        FlameFunction func = FlameFunctionFactory.createFunction("eyefish");
+        FlameFunction func = FlameFunctionFactory.getFunction("eyefish");
 
         // Тест: (0, 0) → (0, 0)
         double[] result = func.apply(0, 0);
@@ -388,7 +388,7 @@ public class FlameFunctionTest {
     @Test
     @DisplayName("Bubble: 4/(r²+4) * [x, y]")
     public void testBubbleFunction() {
-        FlameFunction func = FlameFunctionFactory.createFunction("bubble");
+        FlameFunction func = FlameFunctionFactory.getFunction("bubble");
 
         // Тест: (0, 0) → (0, 0)
         double[] result = func.apply(0, 0);
@@ -404,7 +404,7 @@ public class FlameFunctionTest {
     @Test
     @DisplayName("Modulus: периодическое ограничение")
     public void testModulusFunction() {
-        FlameFunction func = FlameFunctionFactory.createFunction("modulus");
+        FlameFunction func = FlameFunctionFactory.getFunction("modulus");
 
         // Тест: (0.5, 0.5) должно остаться
         double[] result = func.apply(0.5, 0.5);
@@ -415,7 +415,7 @@ public class FlameFunctionTest {
     @Test
     @DisplayName("Perspective: масштаб зависит от x")
     public void testPerspectiveFunction() {
-        FlameFunction func = FlameFunctionFactory.createFunction("perspective");
+        FlameFunction func = FlameFunctionFactory.getFunction("perspective");
 
         // Тест: (0, 1) angle=0, scale=1
         double[] result = func.apply(0, 1);
@@ -426,7 +426,7 @@ public class FlameFunctionTest {
     @Test
     @DisplayName("Rotate: поворот на 0.5 радиан")
     public void testRotateFunction() {
-        FlameFunction func = FlameFunctionFactory.createFunction("rotate");
+        FlameFunction func = FlameFunctionFactory.getFunction("rotate");
 
         // Тест: (1, 0) → (cos(0.5), sin(0.5))
         double[] result = func.apply(1, 0);
@@ -437,7 +437,7 @@ public class FlameFunctionTest {
     @Test
     @DisplayName("Crackle: привязка к сетке")
     public void testCrackleFunction() {
-        FlameFunction func = FlameFunctionFactory.createFunction("crackle");
+        FlameFunction func = FlameFunctionFactory.getFunction("crackle");
 
         double[] result = func.apply(0.7, 0.3);
         // Должно привязаться к ближайшей ячейке 0.5
@@ -450,7 +450,7 @@ public class FlameFunctionTest {
     @Test
     @DisplayName("Фабрика выбрасывает исключение для неизвестной функции")
     public void testUnknownFunctionThrowsException() {
-        assertThrows(IllegalArgumentException.class, () -> FlameFunctionFactory.createFunction("unknown_function"));
+        assertThrows(IllegalArgumentException.class, () -> FlameFunctionFactory.getFunction("unknown_function"));
     }
 
     @ParameterizedTest
@@ -488,7 +488,7 @@ public class FlameFunctionTest {
             })
     @DisplayName("Все функции корректно работают с нулевыми координатами")
     public void testAllFunctionsHandleZero(String functionName) {
-        FlameFunction function = FlameFunctionFactory.createFunction(functionName);
+        FlameFunction function = FlameFunctionFactory.getFunction(functionName);
         double[] result = function.apply(0, 0);
 
         assertNotNull(result);
@@ -502,8 +502,8 @@ public class FlameFunctionTest {
     @Test
     @DisplayName("Кэш фабрики возвращает тот же экземпляр")
     public void testFactoryCaching() {
-        FlameFunction func1 = FlameFunctionFactory.createFunction("swirl");
-        FlameFunction func2 = FlameFunctionFactory.createFunction("swirl");
+        FlameFunction func1 = FlameFunctionFactory.getFunction("swirl");
+        FlameFunction func2 = FlameFunctionFactory.getFunction("swirl");
 
         // Проверяем что это один и тот же объект (кэш работает)
         assertSame(func1, func2, "Фабрика должна возвращать закэшированный экземпляр");

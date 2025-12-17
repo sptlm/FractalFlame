@@ -4,7 +4,9 @@ import academy.config.AffineTransform;
 import academy.config.FractalConfig;
 import academy.config.ImageSize;
 import academy.config.TransformFunction;
-import academy.render.FractalRenderer;
+import academy.render.MultiThreadedRenderer;
+import academy.render.Renderer;
+import academy.render.SingleThreadedRenderer;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,8 +42,13 @@ public class SimpleFractalBenchmark {
     private static void warmup() {
         try {
             FractalConfig warmupConfig = createConfig(1, WARMUP_ITERATIONS);
-            FractalRenderer renderer = new FractalRenderer(warmupConfig);
-            renderer.render();
+            Renderer renderer;
+            if (warmupConfig.getThreads() > 1) {
+                renderer = new MultiThreadedRenderer();
+            } else {
+                renderer = new SingleThreadedRenderer();
+            }
+            renderer.render(warmupConfig);
         } catch (Exception e) {
             System.out.println("Warmup error: " + e.getMessage());
         }
@@ -55,8 +62,13 @@ public class SimpleFractalBenchmark {
 
             long startTime = System.nanoTime();
             try {
-                FractalRenderer renderer = new FractalRenderer(config);
-                renderer.render();
+                Renderer renderer;
+                if (config.getThreads() > 1) {
+                    renderer = new MultiThreadedRenderer();
+                } else {
+                    renderer = new SingleThreadedRenderer();
+                }
+                renderer.render(config);
             } catch (Exception e) {
                 System.out.println("Render error: " + e.getMessage());
                 times[run] = -1;

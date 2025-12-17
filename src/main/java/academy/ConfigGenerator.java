@@ -1,7 +1,9 @@
 package academy;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.*;
 
 /** Не по тз, написал для себя, чтобы перебирать быстро конфиги и искать красивые генерации:] */
@@ -114,7 +116,7 @@ public class ConfigGenerator {
 
                 scale = Math.max(Math.sqrt(a * a + d * d), Math.sqrt(b * b + e * e));
                 det = a * e - b * d;
-            } while (scale >= 1.0 || Math.abs(det) < 0.000001);
+            } while (scale >= 1.0 || Math.abs(det) < 0.0001);
 
             params.put("a", Math.round(a * 10.0) / 10.0);
             params.put("b", Math.round(b * 10.0) / 10.0);
@@ -135,14 +137,17 @@ public class ConfigGenerator {
     }
 
     private static double randomCoeff() {
-        return -1.0 + (random.nextInt(4) == 0 ? 1 : random.nextDouble() * 2.0);
+        if (random.nextInt(4) == 0) {
+            return 0.0;
+        }
+
+        return -1.0 + random.nextDouble() * 2.0;
     }
 
     public static void saveConfigToFile(String configJson, String filePath) {
         try {
-            Path path = Path.of(filePath);
-            mapper.writerWithDefaultPrettyPrinter()
-                    .writeValue(path.toFile(), mapper.readValue(configJson, Object.class));
+            Path path = Paths.get(filePath);
+            Files.writeString(path, configJson);
             System.out.println("Конфигурация сохранена в: " + path.toAbsolutePath());
         } catch (Exception e) {
             throw new RuntimeException("Ошибка при сохранении конфигурации: " + e.getMessage(), e);
