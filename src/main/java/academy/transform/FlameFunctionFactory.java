@@ -1,57 +1,48 @@
 package academy.transform;
 
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.Map;
 
 public class FlameFunctionFactory {
 
-    private static final Map<String, FlameFunction> FUNCTIONS;
+    private static final Map<String, FlameFunction> FUNCTIONS = Map.ofEntries(
+            // Классические функции
+            Map.entry("sinusoidal", new SinusoidalFunction()),
+            Map.entry("spherical", new SphericalFunction()),
+            Map.entry("swirl", new SwirlFunction()),
+            Map.entry("horseshoe", new HorseshoeFunction()),
+            Map.entry("diamond", new DiamondFunction()),
 
-    static {
-        Map<String, FlameFunction> map = new HashMap<>();
+            // Полярные преобразования
+            Map.entry("polar", new PolarFunction()),
+            Map.entry("waves", new WavesFunction()),
+            Map.entry("spiral", new SpiralFunction()),
 
-        // Классические функции
-        map.put("sinusoidal", new SinusoidalFunction());
-        map.put("spherical", new SphericalFunction());
-        map.put("swirl", new SwirlFunction());
-        map.put("horseshoe", new HorseshoeFunction());
-        map.put("diamond", new DiamondFunction());
+            // Комплексные функции
+            Map.entry("julia", new JuliaFunction()),
+            Map.entry("disc", new DiscFunction()),
+            Map.entry("hyperbolic", new HyperbolicFunction()),
 
-        // Полярные преобразования
-        map.put("polar", new PolarFunction());
-        map.put("waves", new WavesFunction());
-        map.put("spiral", new SpiralFunction());
+            // Тригонометрические функции
+            Map.entry("cosine", new CosineFunction()),
+            Map.entry("tangent", new TangentFunction()),
+            Map.entry("power", new PowerFunction()),
+            Map.entry("exponential", new ExponentialFunction()),
 
-        // Комплексные функции
-        map.put("julia", new JuliaFunction());
-        map.put("disc", new DiscFunction());
-        map.put("hyperbolic", new HyperbolicFunction());
-
-        // Тригонометрические функции
-        map.put("cosine", new CosineFunction());
-        map.put("tangent", new TangentFunction());
-        map.put("power", new PowerFunction());
-        map.put("exponential", new ExponentialFunction());
-
-        // Прочие функции
-        map.put("heart", new HeartFunction());
-        map.put("shell", new ShellFunction());
-        map.put("whirlpool", new WhirlpoolFunction());
-        map.put("radial", new RadialFunction());
-        map.put("blob", new BlobFunction());
-        map.put("crosshatch", new CrosshatchFunction());
-        map.put("logarithmic", new LogarithmicFunction());
-        map.put("super_shape", new SuperShapeFunction());
-        map.put("eyefish", new EyefishFunction());
-        map.put("bubble", new BubbleFunction());
-        map.put("modulus", new ModulusFunction());
-        map.put("perspective", new PerspectiveFunction());
-        map.put("rotate", new RotateFunction());
-        map.put("crackle", new CrackleFunction());
-
-        FUNCTIONS = Collections.unmodifiableMap(map);
-    }
+            // Прочие функции
+            Map.entry("heart", new HeartFunction()),
+            Map.entry("shell", new ShellFunction()),
+            Map.entry("whirlpool", new WhirlpoolFunction()),
+            Map.entry("radial", new RadialFunction()),
+            Map.entry("blob", new BlobFunction()),
+            Map.entry("crosshatch", new CrosshatchFunction()),
+            Map.entry("logarithmic", new LogarithmicFunction()),
+            Map.entry("super_shape", new SuperShapeFunction()),
+            Map.entry("eyefish", new EyefishFunction()),
+            Map.entry("bubble", new BubbleFunction()),
+            Map.entry("modulus", new ModulusFunction()),
+            Map.entry("perspective", new PerspectiveFunction()),
+            Map.entry("rotate", new RotateFunction()),
+            Map.entry("crackle", new CrackleFunction()));
 
     public static FlameFunction getFunction(String name) {
         FlameFunction function = FUNCTIONS.get(name.toLowerCase());
