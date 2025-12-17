@@ -3,7 +3,6 @@ package academy;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.*;
 
 /** Не по тз, написал для себя, чтобы перебирать быстро конфиги и искать красивые генерации:] */
@@ -146,7 +145,7 @@ public class ConfigGenerator {
 
     public static void saveConfigToFile(String configJson, String filePath) {
         try {
-            Path path = Paths.get(filePath);
+            Path path = Path.of(filePath);
             Files.writeString(path, configJson);
             System.out.println("Конфигурация сохранена в: " + path.toAbsolutePath());
         } catch (Exception e) {
